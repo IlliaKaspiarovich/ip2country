@@ -57,7 +57,7 @@
   import { lookupIp } from './api/ipLookup';
   import type { RowItem } from './types';
   import { formatTimeNowInTZ } from './utils/time';
-  import { isValidIPv4 } from './utils/validate';
+  import { isValidIP } from './utils/validate';
 
   let counter = 1;
 
@@ -86,7 +86,7 @@
       return;
     }
 
-    if (!isValidIPv4(value)) {
+    if (!isValidIP(value)) {
       row.status = 'error';
       row.error = 'Invalid IPv4 address';
       row.result = undefined;
