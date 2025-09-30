@@ -60,6 +60,7 @@ async function fetchIpapi(ip: string): Promise<LookupResult> {
   return {
     ip,
     country: data.country_name ?? undefined,
+    countryCode: ((data as Record<string, unknown>).country as string) ?? undefined,
     city: data.city ?? undefined,
     timezone: data.timezone ?? undefined,
   };

@@ -32,12 +32,15 @@
             <div v-else-if="row.status === 'error'" class="status error">{{ row.error }}</div>
             <div v-else-if="row.status === 'done' && row.result" class="status">
               <span class="badge">
+                <span v-if="row.result?.countryCode">{{
+                  countryCodeToEmoji(row.result.countryCode)
+                }}</span>
                 <strong class="country">{{ row.result.country || 'Unknown' }}</strong>
-                <span v-if="row.result.city">• {{ row.result.city }}</span>
+                <!--                <span v-if="row.result.city">• {{ row.result.city }}</span>-->
               </span>
-              <div v-if="row.result.timezone" class="small">
-                Local time: {{ timeNow(row.result.timezone) }}
-              </div>
+              <span v-if="row.result.timezone" class="small ml-8">
+                {{ timeNow(row.result.timezone) }}
+              </span>
             </div>
             <div v-else class="status small">Blur to search</div>
           </div>
@@ -56,6 +59,7 @@
 
   import { lookupIp } from './api/ipLookup';
   import type { RowItem } from './types';
+  import { countryCodeToEmoji } from './utils/flags';
   import { formatTimeNowInTZ } from './utils/time';
   import { isValidIP } from './utils/validate';
 
