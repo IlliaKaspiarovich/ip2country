@@ -92,7 +92,7 @@
 
     if (!isValidIP(value)) {
       row.status = 'error';
-      row.error = 'Invalid IPv4 address';
+      row.error = 'Invalid IP address';
       row.result = undefined;
       return;
     }
