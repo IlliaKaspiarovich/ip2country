@@ -21,13 +21,21 @@
           <input
             v-model="row.ip"
             class="input"
+            :class="{ 'is-loading': row.status === 'loading' }"
             :disabled="row.status === 'loading'"
-            :placeholder="'e.g. 8.8.8.8'"
+            :aria-busy="row.status === 'loading' ? 'true' : 'false'"
+            :placeholder="'e.g. 8.8.8.8 or 2001:db8::1'"
             @blur="onBlur(row)"
           />
           <div>
-            <div v-if="row.status === 'loading'" class="status">
-              <span class="spinner"></span> Looking up…
+            <div
+              v-if="row.status === 'loading'"
+              class="status status-inline"
+              role="status"
+              aria-live="polite"
+            >
+              <span class="spinner" aria-hidden="true"></span>
+              <span>Looking up…</span>
             </div>
             <div v-else-if="row.status === 'error'" class="status error">{{ row.error }}</div>
             <div v-else-if="row.status === 'done' && row.result" class="status">
